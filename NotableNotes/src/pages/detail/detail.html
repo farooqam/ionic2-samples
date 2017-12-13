@@ -14,5 +14,17 @@
 
 
 <ion-content padding>
-{{note.content}}
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Title</ion-label>
+      <ion-input type="text" [(ngModel)]="note.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Date</ion-label>
+      <ion-datetime type="text" [(ngModel)]="note.date"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-textarea placeholder="Content" [(ngModel)]="note.content"></ion-textarea>
+    </ion-item>
+  </ion-list>
 </ion-content>
