@@ -18,6 +18,7 @@ export class DetailPage {
 
   public note: any = {};
   private isNewNote: boolean = false;
+  private discardChanges: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -39,6 +40,14 @@ export class DetailPage {
   }
 
   public onDelete() {
+
+    if(this.isNewNote) {
+      // new note, disccard changes and return
+      this.discardChanges = true;
+      this.navCtrl.pop();
+      return;
+    }
+
     let confirm = this.alertCtrl.create({
       title: 'Confirm delete',
       message: 'Deleting a note is permanent. Are you sure you want to cotinue?',
@@ -59,12 +68,21 @@ export class DetailPage {
   }
 
   ionViewWillLeave() {
+    if(this.discardChanges) {
+      // do nothing
+      return;
+    }
+
     if(this.note.title === '' && this.note.date === '' && this.note.content === '') {
       // blank note - don't do anything
-    } else if(this.isNewNote) {
+      return;
+    } 
+    
+    if(this.isNewNote) {
       this.noteService.addNote(this.note);
-    } else {
-        // editing note - don't do anything
-    }
+      return;
+    } 
+
+    // editing note - don't do anything
   }
 }
