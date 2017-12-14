@@ -19,4 +19,14 @@ export class NoteService {
           content: 'A good grasp of it is crucial to developing great Ionic 2 apps.'
         }
       ];
+
+      public deleteNote(note) {
+        let index = this.notes.indexOf(note);
+
+        if(index === -1) {
+          return;
+        }
+
+        this.notes.splice(index, 1);
+      }
 }
