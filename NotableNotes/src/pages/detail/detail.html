@@ -7,9 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{note.title}}</ion-title>
+    <ion-title *ngIf="!isNewNote">{{note.title}}</ion-title>
+    <ion-title *ngIf="isNewNote">Add Note</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="onDelete()">
+      <button *ngIf="!isNewNote" ion-button icon-only (click)="onDelete()">
         <ion-icon name="trash"></ion-icon>
       </button>
     </ion-buttons>

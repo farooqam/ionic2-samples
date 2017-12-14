@@ -20,6 +20,10 @@ export class NoteService {
         }
       ];
 
+      public addNote(note) {
+        this.notes.push(note);
+      }
+
       public deleteNote(note) {
         let index = this.notes.indexOf(note);
 

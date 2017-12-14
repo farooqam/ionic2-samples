@@ -17,13 +17,25 @@ import { NoteService } from '../../services/note.service';
 export class DetailPage {
 
   public note: any = {};
+  private isNewNote: boolean = false;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     private noteService: NoteService,
     private alertCtrl: AlertController) {
       this.note = this.navParams.get('note');
-      console.log('nav-param', this.note);
+
+      if(!this.note) {
+        this.note = {
+          id: '',
+          date: '',
+          title: '',
+          content: ''
+        };
+
+        this.isNewNote = true;
+      }
   }
 
   public onDelete() {
@@ -46,4 +58,13 @@ export class DetailPage {
     console.log('ionViewDidLoad DetailPage');
   }
 
+  ionViewWillLeave() {
+    if(this.note.title === '' && this.note.date === '' && this.note.content === '') {
+      // blank note - don't do anything
+    } else if(this.isNewNote) {
+      this.noteService.addNote(this.note);
+    } else {
+        // editing note - don't do anything
+    }
+  }
 }

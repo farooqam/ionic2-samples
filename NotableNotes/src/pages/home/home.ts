@@ -15,8 +15,10 @@ export class HomePage {
   }
 
   public onItemClick(note: any) {
-    console.log('item-click', note);
     this.navCtrl.push('DetailPage', {note: note});
   }
 
+  public onAddNoteClick() {
+    this.navCtrl.push('DetailPage');
+  }
 }
